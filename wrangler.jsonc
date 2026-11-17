@@ -76,13 +76,13 @@
 		{
 			"binding": "DB",
 			"database_name": "mailflare",
-			"migrations_dir": "drizzle/migrations","database_id": "fe305ab1-d834-4aa1-829e-c15e822e256c",
+			"migrations_dir": "drizzle/migrations",
 		},
 	],
 	"r2_buckets": [
 		{
 			"binding": "BUCKET",
-			"bucket_name": "mailflare-raw","preview_bucket_name": "mailflare-raw",
+			"bucket_name": "mailflare-raw",
 		},
 	],
 	"queues": {
@@ -104,6 +104,8 @@
 			{
 				"queue": "mailflare-inbound",
 				"max_batch_size": 5,
+				// New mail should reach the inbox at once; do not wait up to 5 s for a batch to fill.
+				"max_batch_timeout": 1,
 				"max_retries": 3,
 			},
 			{
